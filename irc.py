@@ -1,5 +1,4 @@
 import socket
-import sys
 
 
 class IRC:
@@ -20,15 +19,20 @@ class IRC:
         self.irc.send("NICK " + nick + "\n")
 
     def connect(self, server, channel, botnick):
-        #defines the socket
+        # Defines the socket
         print("connecting to:"+server)
-        self.irc.connect((server, 6667))                                                         #connects to the server
-        self.irc.send("USER " + botnick + " " + botnick +" " + botnick + " :This is a fun bot!\n") #user authentication
+        # Connects to the server
+        self.irc.connect((server, 6667))
+        # User authentication
+        self.irc.send("USER " + botnick + " " + botnick + " " +
+                      botnick + " :This is a fun bot!\n")
         self.irc.send("NICK " + botnick + "\n")
-        self.irc.send("JOIN " + channel + "\n")        #join the chan
+        # Join the channel
+        self.irc.send("JOIN " + channel + "\n")
 
     def get_text(self):
-        text=self.irc.recv(2040)  #receive the text
+        # Receive the text
+        text = self.irc.recv(2040)
 
         if text.find('PING') != -1:
             self.irc.send('PONG ' + text.split()[1] + '\r\n')
