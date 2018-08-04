@@ -20,12 +20,13 @@ class IRC:
 
     def connect(self, server, channel, botnick):
         # Defines the socket
-        print("connecting to:"+server)
+        print("Connecting to: "+server)
         # Connects to the server
         self.irc.connect((server, 6667))
         # User authentication
-        self.irc.send("USER " + botnick + " " + botnick + " " +
-                      botnick + " :This is a fun bot!\n")
+        # (botnick + " ")*3 has been used for code optimization
+        # as requested in the Pull Request #1
+        self.irc.send("USER " + (botnick + " ")*3 + ":This is a fun bot!\n")
         self.irc.send("NICK " + botnick + "\n")
         # Join the channel
         self.irc.send("JOIN " + channel + "\n")
