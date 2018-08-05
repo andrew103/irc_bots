@@ -23,7 +23,7 @@ class IRC:
         #defines the socket
         print("connecting to:"+server)
         self.irc.connect((server, 6667))                                                         #connects to the server
-        self.irc.send("USER " + botnick + " " + botnick +" " + botnick + " :This is a fun bot!\n") #user authentication
+        self.irc.send("USER " + (botnick + " ")*3 + ":This is a fun bot!\n") #user authentication
         self.irc.send("NICK " + botnick + "\n")
         self.irc.send("JOIN " + channel + "\n")        #join the chan
 

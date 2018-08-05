@@ -4,7 +4,7 @@ import os
 import random
 import time
 
-channel = get_channel()
+channel = "#bot_test"
 server = get_server()
 nickname = "spider_bot"
 
@@ -27,11 +27,14 @@ while 1:
 
         time.sleep(5)
 
-        irc = IRC()
+        # irc = IRC()
         irc.connect(server, channel, nickname)
 
     if "PRIVMSG" in text and channel in text and "goat" in text.lower():
-        irc.send(channel, "THE HERD")
+        with open("./static/battle_goat.txt", "r") as goat:
+            lines = goat.readlines()
+            for line in lines:
+                irc.send(channel, line.strip("""\n"""))
 
     if "PRIVMSG" in text and channel in text and ("tom brady" in text.lower() or "tb12" in text.lower() or "touchdown tommy" in text.lower()):
         irc.send(channel, "the GOAT")
@@ -43,4 +46,7 @@ while 1:
         irc.send(channel, "ALL THE GOATS")
 
     if "PRIVMSG" in text and channel in text and "idea" in text.lower():
-        irc.send(channel, "it's gonna be HUUUGGEEE")
+        irc.send(channel, "it's gonna be YUUUGGEEE")
+
+    if "QUIT" in text:
+        irc.send(channel, "*mic drop*")
