@@ -1,52 +1,65 @@
-from irc import *
-from secrets import *
-import os
-import random
-import time
-
-channel = "#bot_test"
-server = get_server()
-nickname = "spider_bot"
-
-irc = IRC()
-irc.connect(server, channel, nickname)
+from irc import IRC
+from secrets import get_server, get_channel
+from time import sleep
 
 
-while 1:
-    text = irc.get_text()
-    print text
+def check_msg(text, channel):
+    return "PRIVMSG" in text and channel in text
 
-    if "PRIVMSG" in text and channel in text and "*snap*" in text.lower():
-        irc.send(channel, "Alexis...I don't feel so good...")
-        irc.quit("disintegrated")
 
-        if nickname == "spider_bot":
-            nickname = "CAPTAIN_MARVEL"
-        elif nickname == "CAPTAIN_MARVEL":
-            nickname = "spider_bot"
+def spider_bot():
+    channel = get_channel()
+    server = get_server()
+    nickname = "spider_bot"
 
-        time.sleep(5)
+    irc = IRC()
+    irc.connect(server, channel, nickname)
 
-        # irc = IRC()
-        irc.connect(server, channel, nickname)
+    # Infinite loop until disconnected
+    while True:
+        text = irc.get_text()
+        print text
 
-    if "PRIVMSG" in text and channel in text and "goat" in text.lower():
-        with open("./static/battle_goat.txt", "r") as goat:
-            lines = goat.readlines()
-            for line in lines:
-                irc.send(channel, line.strip("""\n"""))
+        if check_msg(text, channel) and "*snap*" in text.lower():
+            irc.send(channel, "Alexis...I don't feel so good...")
+            irc.quit("disintegrated")
 
-    if "PRIVMSG" in text and channel in text and ("tom brady" in text.lower() or "tb12" in text.lower() or "touchdown tommy" in text.lower()):
-        irc.send(channel, "the GOAT")
+            if nickname == "spider_bot":
+                nickname = "CAPTAIN_MARVEL"
+            elif nickname == "CAPTAIN_MARVEL":
+                nickname = "spider_bot"
 
-    if "PRIVMSG" in text and channel in text and "spider_bot" in text.lower():
-        irc.send(channel, ":D")
+            sleep(5)
 
-    if "PRIVMSG" in text and channel in text and "the herd" in text.lower():
-        irc.send(channel, "ALL THE GOATS")
+            # Because quitting closes the connection with the server
+            irc = IRC()
+            irc.connect(server, channel, nickname)
 
-    if "PRIVMSG" in text and channel in text and "idea" in text.lower():
-        irc.send(channel, "it's gonna be YUUUGGEEE")
+        if check_msg(text, channel) and "goat" in text.lower():
+            with open("./static/battle_goat.txt", "r") as goat:
+                lines = goat.readlines()
+                for line in lines:
+                    irc.send(channel, line.strip("""\n"""))
+          
+        if check_msg(text, channel)\
+           and ("tom brady" in text.lower()
+                or "tb12" in text.lower()
+                or "touchdown tommy" in
+                text.lower()):
+            irc.send(channel, "the GOAT")
 
-    if "QUIT" in text:
-        irc.send(channel, "*mic drop*")
+        if check_msg(text, channel) and "spider_bot" in text.lower():
+            irc.send(channel, ":D")
+
+        if check_msg(text, channel) and "the herd" in text.lower():
+            irc.send(channel, "ALL THE GOATS")
+
+        if check_msg(text, channel) and "idea" in text.lower():
+            irc.send(channel, "it's gonna be YUUUGGEEE")
+
+        if "QUIT" in text:
+            irc.send(channel, "*mic drop*")
+
+
+if __name__ == "__main__":
+    spider_bot()
