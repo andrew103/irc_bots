@@ -31,13 +31,16 @@ def spider_bot():
 
             sleep(5)
 
-            # Because quitting closes the conntection with the server
+            # Because quitting closes the connection with the server
             irc = IRC()
             irc.connect(server, channel, nickname)
 
         if check_msg(text, channel) and "goat" in text.lower():
-            irc.send(channel, "THE HERD")
-
+            with open("./static/battle_goat.txt", "r") as goat:
+                lines = goat.readlines()
+                for line in lines:
+                    irc.send(channel, line.strip("""\n"""))
+          
         if check_msg(text, channel)\
            and ("tom brady" in text.lower()
                 or "tb12" in text.lower()
@@ -52,7 +55,10 @@ def spider_bot():
             irc.send(channel, "ALL THE GOATS")
 
         if check_msg(text, channel) and "idea" in text.lower():
-            irc.send(channel, "it's gonna be HUUUGGEEE")
+            irc.send(channel, "it's gonna be YUUUGGEEE")
+
+        if "QUIT" in text:
+            irc.send(channel, "*mic drop*")
 
 
 if __name__ == "__main__":
