@@ -20,7 +20,7 @@ def thanos_bot():
 
     # Infinite loop until disconnected
     while True:
-        text = filtered_input(irc.get_text())
+        text = filter_input(irc.get_text())
         print text
 
         if check_msg(text, channel) and "perfectly balanced" in text.lower():
