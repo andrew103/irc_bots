@@ -63,6 +63,12 @@ def spider_bot():
                 for line in lines:
                     irc.send(channel, line.strip("""\n"""))
 
+        if check_msg(text, channel) and "pineapple" in text.lower():
+            with open("./static/pineapple.txt", "r") as pineapple:
+                lines = pineapple.readlines()
+                for line in lines:
+                    irc.send(channel, line.strip("""\n"""))
+
         if check_msg(text, channel)\
            and ("tom brady" in text.lower()
                 or "tb12" in text.lower()
