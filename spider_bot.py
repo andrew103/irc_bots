@@ -7,6 +7,28 @@ def check_msg(text, channel):
     return "PRIVMSG" in text and channel in text
 
 
+def filter_input(text, nums=False, chars=False, symbols=False, nofilter=False):
+    if nofilter:
+        return text
+
+    output = "".join([c for c in text if ord(c) > 31])
+
+    if nums:
+        output = "".join([c for c in output if not (ord(c)>47 and ord(c)<58)])
+
+    if chars:
+        output = "".join([c for c in output if not (ord(c)>64 and ord(c)<91)
+                                            and not(ord(c)>96 and ord(c)<123)])
+
+    if symbols:
+        output = "".join([c for c in output if not (ord(c)>31 and ord(c)<48)
+                                            and not(ord(c)>57 and ord(c)<65)
+                                            and not(ord(c)>90 and ord(c)<97)
+                                            and not(ord(c)>122)])
+
+    return output
+
+
 def spider_bot():
     channel = get_channel()
     server = get_server()
@@ -17,7 +39,7 @@ def spider_bot():
 
     # Infinite loop until disconnected
     while True:
-        text = irc.get_text()
+        text = filter_input(irc.get_text())
         print text
 
         if check_msg(text, channel) and "*snap*" in text.lower():
@@ -40,7 +62,7 @@ def spider_bot():
                 lines = goat.readlines()
                 for line in lines:
                     irc.send(channel, line.strip("""\n"""))
-          
+
         if check_msg(text, channel)\
            and ("tom brady" in text.lower()
                 or "tb12" in text.lower()

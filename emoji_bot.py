@@ -13,6 +13,28 @@ def emoji_bot_help(irc, channel):
     irc.send(channel, "Use '*' before and after the option. Ex: *smiles*")
 
 
+def filter_input(text, nums=False, chars=False, symbols=False, nofilter=False):
+    if nofilter:
+        return text
+
+    output = "".join([c for c in text if ord(c) > 31])
+
+    if nums:
+        output = "".join([c for c in output if not (ord(c)>47 and ord(c)<58)])
+
+    if chars:
+        output = "".join([c for c in output if not (ord(c)>64 and ord(c)<91)
+                                            and not(ord(c)>96 and ord(c)<123)])
+
+    if symbols:
+        output = "".join([c for c in output if not (ord(c)>31 and ord(c)<48)
+                                            and not(ord(c)>57 and ord(c)<65)
+                                            and not(ord(c)>90 and ord(c)<97)
+                                            and not(ord(c)>122)])
+
+    return output
+
+
 def emoji_bot():
 
     channel = get_channel()
@@ -27,7 +49,7 @@ def emoji_bot():
 
     # Infinite loop until disconnected
     while True:
-        text = irc.get_text()
+        text = filter_input(irc.get_text())
         print text
 
         # Retrieve Emojibot help  whenever "emoji_bot --help" is called
