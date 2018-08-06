@@ -41,10 +41,15 @@ def thanos_bot():
         text = filter_input(irc.get_text(), nums=True)
         print text
 
-        if check_msg(text, channel) and "perfectly balanced" in text.lower():
+        if check_msg(text, channel) and "imperfectly balanced" in text.lower():
+            irc.send(channel, "Let's fix that shall we... *snap*")
+        elif check_msg(text, channel) and "perfectly balanced" in text.lower():
             irc.send(channel, "As all things should be")
 
-        if check_msg(text, channel) and "perfectly balanced"[::-1]\
+        if check_msg(text, channel) and "imperfectly balanced"[::-1]\
+                                        in text.lower():
+            irc.send(channel, "Let's fix that shall we... *snap*")
+        elif check_msg(text, channel) and "perfectly balanced"[::-1]\
                                         in text.lower():
             irc.send(channel, "As all things should be"[::-1])
 
