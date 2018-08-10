@@ -35,7 +35,7 @@ def filter_input(text, nums=False, chars=False, symbols=False, nofilter=False):
     return output
 
 
-def emoji_bot():
+def bot_run():
 
     channel = get_channel()
     server = get_server()
@@ -116,4 +116,4 @@ def emoji_bot():
 
 
 if __name__ == "__main__":
-    emoji_bot()
+    bot_run()
