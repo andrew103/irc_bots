@@ -9,7 +9,7 @@ def check_msg(text, channel):
 
 def emoji_bot_help(irc, channel):
     irc.send(channel, "Emojis available:")
-    irc.send(channel, "smiles, winks, laughs, fistbombs, heart, smirks, sleeps, cool, cries, tongue")
+    irc.send(channel, "smiles, winks, laughs, fistbumps, heart, smirks, sleeps, cool, cries, tongue")
     irc.send(channel, "Use '*' before and after the option. Ex: *smiles*")
 
 
@@ -73,7 +73,7 @@ def bot_run():
                                             use_aliases=True).encode(
                                                 "utf-8", "replace"))
 
-        if check_msg(text, channel) and "*fistbombs*" in text.lower():
+        if check_msg(text, channel) and "*fistbumps*" in text.lower():
             irc.send(channel, emoji.emojize(':punch:',
                                             use_aliases=True).encode(
                                                 "utf-8", "replace"))
