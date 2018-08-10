@@ -28,7 +28,7 @@ def filter_input(text, nums=False, chars=False, symbols=False, nofilter=False):
     return output
 
 
-def thanos_bot():
+def bot_run():
     channel = get_channel()
     server = get_server()
     nickname = "THANOS"
@@ -62,4 +62,4 @@ def thanos_bot():
 
 
 if __name__ == "__main__":
-    thanos_bot()
+    bot_run()

@@ -29,7 +29,7 @@ def filter_input(text, nums=False, chars=False, symbols=False, nofilter=False):
     return output
 
 
-def spider_bot():
+def bot_run():
     channel = get_channel()
     server = get_server()
     nickname = "spider_bot"
@@ -90,4 +90,4 @@ def spider_bot():
 
 
 if __name__ == "__main__":
-    spider_bot()
+    bot_run()

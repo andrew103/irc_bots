@@ -28,7 +28,7 @@ def filter_input(text, nums=False, chars=False, symbols=False, nofilter=False):
     return output
 
 
-def bot_template():
+def bot_run():
     channel = get_channel()
     server = get_server()
     nickname = "test_bot"
@@ -45,4 +45,4 @@ def bot_template():
 
 
 if __name__ == "__main__":
-    bot_template()
+    bot_run()
