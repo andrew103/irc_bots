@@ -1,5 +1,7 @@
 ## ASCII Art Image Sources:
 
+* battle_goat.txt - http://valkyrie.kwister.com/home/aart.html (valkyrie)
+  * Explicit permission to modify given by the artist over email exchange
 * pineapple.txt - https://asciiart.website//joan/www.geocities.com/SoHo/7373/please.html (Joan G. Stark)
 
 **Note: For contributors to this repository, any ASCII art added to the repo should not have artist signatures removed from the image and should have a link to the terms of use set by the artist and the name/signature of the artist. If the artist's terms of use cannot be found, their artwork should not appear in this repository**
